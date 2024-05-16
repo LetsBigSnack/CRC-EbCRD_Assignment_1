@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    void Awake()  {
-
-    }
+    [SerializeField] private int damage = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,17 +20,9 @@ public class Collectible : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-       // gameObject.SetActive(false);
-       // Destroy(gameObject);
-        Debug.Log(other.gameObject.name);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
         if (other.gameObject.name.Contains("Player"))
         {
-            GameManager.Instance.IncreaseCoins(1);
-            Destroy(gameObject);
+            GameManager.Instance.DecreaseHealth(damage);
         } 
     }
 }
